@@ -3,6 +3,8 @@
 ## アカウント情報
 
 - **アカウント名**: SLOW HOUSE @aomori｜青森市のゲストハウス
+- **Instagramアカウント**: [@slowhouse_aomori](https://www.instagram.com/slowhouse_aomori?igsh=MWpia2p6ZXQ5YTd5Yg==)
+- **フォロワー数**: 1,097
 - **オープン予定**: 2026年4月1日
 
 ## 目的

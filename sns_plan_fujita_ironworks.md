@@ -1,5 +1,14 @@
 # 藤田鉄工所 SNS運用企画書（2026年度）
 
+## アカウント情報
+
+| アカウント | 用途 | フォロワー数 | URL |
+|-----------|------|-------------|-----|
+| [@fjironworks](https://www.instagram.com/fjironworks?igsh=MWJveG03bXA1NWJ3YQ==) | プロダクト（ボタニカルポット） | 720 | https://www.instagram.com/fjironworks |
+| [@fj_ironworks_project](https://www.instagram.com/fj_ironworks_project?igsh=MWNlMG9yamZiYmp6YQ==) | プロジェクト（特注品・オーダーメイド） | 464 | https://www.instagram.com/fj_ironworks_project |
+
+---
+
 ## 全体方針
 
 2026年度は「知ってもらう（認知獲得）」フェーズから「購入や問い合わせ（行動喚起）」へ繋げる戦略に方向転換。
