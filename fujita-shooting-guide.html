@@ -576,20 +576,112 @@
     color: var(--gray-mid);
   }
 
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .sidebar-logo {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .sidebar-nav { list-style: none; padding: 0; flex: 1; }
+
+  .sidebar-nav li a {
+    display: block;
+    padding: 9px 20px;
+    font-size: 9pt;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .sidebar-nav li a.active {
+    color: #fff;
+    border-left-color: var(--accent);
+    background: rgba(192,57,43,0.12);
+  }
+
+  .sidebar-nav li.nav-chapter > a {
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    margin-top: 8px;
+  }
+
+  .sidebar-pdf-btn {
+    margin: 16px;
+    padding: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 8.5pt;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.05em;
+  }
+
+  body.has-sidebar .cover,
+  body.has-sidebar .page {
+    margin-left: 200px;
+  }
+
   /* ===== PRINT ===== */
   @media print {
     body { font-size: 10pt; }
-    .cover { height: 100vh; page-break-after: always; }
-    .page { page-break-after: always; padding: 44px 50px 60px; }
+    .sidebar { display: none; }
+    .cover { height: 100vh; page-break-after: always; margin-left: 0 !important; }
+    .page { page-break-after: always; padding: 44px 50px 60px; margin-left: 0 !important; }
     .page:last-child { page-break-after: auto; }
     @page { margin: 0; size: A4; }
   }
 </style>
 </head>
-<body>
+<body class="has-sidebar">
+
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar">
+  <div class="sidebar-logo">藤田鉄工所<br>撮影ガイドブック</div>
+  <ul class="sidebar-nav">
+    <li><a href="#cover">表紙</a></li>
+    <li class="nav-chapter"><a href="#intro">はじめに</a></li>
+    <li class="nav-chapter"><a href="#chapter1">第1章　iPhone設定</a></li>
+    <li class="nav-chapter"><a href="#chapter2">第2章　撮影の基本</a></li>
+    <li><a href="#chapter2b">　引き・アップ / 光</a></li>
+    <li class="nav-chapter"><a href="#chapter3">第3章　Cinematic</a></li>
+    <li class="nav-chapter"><a href="#chapter4a">第4章　撮影リスト①</a></li>
+    <li><a href="#chapter4b">　撮影リスト②</a></li>
+    <li class="nav-chapter"><a href="#reference">参考動画</a></li>
+  </ul>
+  <button class="sidebar-pdf-btn" onclick="window.print()">PDF に保存</button>
+</nav>
 
 <!-- ===== COVER ===== -->
-<div class="cover">
+<div class="cover" id="cover">
   <div class="cover-accent-bar"></div>
   <div class="cover-big-text">SHOOT</div>
   <div class="cover-label">FUJITA TEKKOSHA / SHOOTING GUIDE</div>
@@ -603,7 +695,7 @@
 </div>
 
 <!-- ===== P1: はじめに ===== -->
-<div class="page">
+<div class="page" id="intro">
   <div class="chapter-header">
     <div class="chapter-num">はじめに</div>
     <div class="chapter-title">撮影をお願いするにあたって</div>
@@ -636,7 +728,7 @@
 </div>
 
 <!-- ===== P2: iPhone設定 ===== -->
-<div class="page">
+<div class="page" id="chapter1">
   <div class="chapter-header">
     <div class="chapter-num">第1章</div>
     <div class="chapter-title">撮影前のiPhone設定</div>
@@ -699,7 +791,7 @@
 </div>
 
 <!-- ===== P3: 撮影の基本 ===== -->
-<div class="page">
+<div class="page" id="chapter2">
   <div class="chapter-header">
     <div class="chapter-num">第2章</div>
     <div class="chapter-title">撮影の基本テクニック</div>
@@ -729,7 +821,7 @@
 </div>
 
 <!-- ===== P4: 引き・アップ / 光 ===== -->
-<div class="page">
+<div class="page" id="chapter2b">
 
   <div class="section">
     <div class="section-title">引きと寄りをセットで撮っていただけると助かります</div>
@@ -775,7 +867,7 @@
 </div>
 
 <!-- ===== P5: Cinematic + コツ ===== -->
-<div class="page">
+<div class="page" id="chapter3">
   <div class="chapter-header">
     <div class="chapter-num">第3章</div>
     <div class="chapter-title">Cinematicモード・撮影のコツ</div>
@@ -840,7 +932,7 @@
 </div>
 
 <!-- ===== P6: 撮影リスト① ===== -->
-<div class="page">
+<div class="page" id="chapter4a">
   <div class="chapter-header">
     <div class="chapter-num">第4章</div>
     <div class="chapter-title">撮影リスト</div>
@@ -868,7 +960,7 @@
 </div>
 
 <!-- ===== P7: 撮影リスト② ===== -->
-<div class="page">
+<div class="page" id="chapter4b">
 
   <div class="scene-block">
     <div class="scene-block-title">② ステンレス鉢の製作</div>
@@ -902,7 +994,7 @@
 </div>
 
 <!-- ===== P8: 参考動画 ===== -->
-<div class="page">
+<div class="page" id="reference">
   <div class="chapter-header">
     <div class="chapter-num">参考動画</div>
     <div class="chapter-title">こんなイメージで撮っていただけると助かります</div>
@@ -985,5 +1077,26 @@
   </div>
 </div>
 
+<script>
+  const sections = ['cover','intro','chapter1','chapter2','chapter2b','chapter3','chapter4a','chapter4b','reference'];
+  const links = {};
+  sections.forEach(id => {
+    const el = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
+    if (el) links[id] = el;
+  });
+
+  function updateActive() {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 80) current = id;
+    });
+    Object.values(links).forEach(a => a.classList.remove('active'));
+    if (links[current]) links[current].classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+</script>
 </body>
 </html>
