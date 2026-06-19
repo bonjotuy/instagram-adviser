@@ -615,22 +615,9 @@
     border-left: 2px solid transparent;
   }
 
-  .sidebar-nav li a:hover {
-    color: #fff;
-    background: rgba(255,255,255,0.05);
-  }
-
-  .sidebar-nav li a.active {
-    color: #fff;
-    border-left-color: var(--accent);
-    background: rgba(192,57,43,0.12);
-  }
-
-  .sidebar-nav li.nav-chapter > a {
-    font-weight: 700;
-    color: rgba(255,255,255,0.75);
-    margin-top: 8px;
-  }
+  .sidebar-nav li a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .sidebar-nav li a.active { color: #fff; border-left-color: var(--accent); background: rgba(192,57,43,0.12); }
+  .sidebar-nav li.nav-chapter > a { font-weight: 700; color: rgba(255,255,255,0.75); margin-top: 8px; }
 
   .sidebar-pdf-btn {
     margin: 16px;
@@ -646,22 +633,135 @@
   }
 
   body.has-sidebar .cover,
-  body.has-sidebar .page {
-    margin-left: 200px;
+  body.has-sidebar .page { margin-left: 200px; }
+
+  /* ===== MOBILE TOPBAR ===== */
+  .topbar {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: var(--black);
+    z-index: 200;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .topbar-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+
+  .hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.2s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 52px; left: 0; right: 0;
+    background: var(--black);
+    z-index: 199;
+    padding: 8px 0 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .mobile-menu.open { display: block; }
+
+  .mobile-menu a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 11pt;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+  }
+
+  .mobile-menu a.active { color: #fff; border-left-color: var(--accent); }
+
+  .mobile-pdf-btn {
+    display: block;
+    margin: 12px 16px 0;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10pt;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    width: calc(100% - 32px);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+    .topbar { display: flex; }
+    body.has-sidebar .cover,
+    body.has-sidebar .page { margin-left: 0; padding-top: 68px; }
+    .cover { padding: 40px 28px 60px; min-height: 100vh; height: auto; }
+    .cover h1 { font-size: 26pt; }
+    .cover-big-text { display: none; }
+    .page { padding: 40px 24px 60px; }
+    .chapter-title { font-size: 14pt; }
+    .diagram-row { grid-template-columns: 1fr; }
+    .tip-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .zoom-compare { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .compare-item:first-child { border-right: none; border-bottom: 1.5px solid var(--border); }
   }
 
   /* ===== PRINT ===== */
   @media print {
     body { font-size: 10pt; }
-    .sidebar { display: none; }
-    .cover { height: 100vh; page-break-after: always; margin-left: 0 !important; }
-    .page { page-break-after: always; padding: 44px 50px 60px; margin-left: 0 !important; }
+    .sidebar, .topbar, .mobile-menu { display: none !important; }
+    .cover { height: 100vh; page-break-after: always; margin-left: 0 !important; padding-top: 80px !important; }
+    .page { page-break-after: always; padding: 44px 50px 60px; margin-left: 0 !important; padding-top: 44px !important; }
     .page:last-child { page-break-after: auto; }
     @page { margin: 0; size: A4; }
   }
 </style>
 </head>
 <body class="has-sidebar">
+
+<!-- ===== MOBILE TOPBAR ===== -->
+<div class="topbar">
+  <div class="topbar-title">藤田鉄工所 撮影ガイド</div>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#cover" class="mob-link">表紙</a>
+  <a href="#intro" class="mob-link">はじめに</a>
+  <a href="#chapter1" class="mob-link">第1章　iPhone設定</a>
+  <a href="#chapter2" class="mob-link">第2章　撮影の基本</a>
+  <a href="#chapter2b" class="mob-link">　引き・アップ / 光</a>
+  <a href="#chapter3" class="mob-link">第3章　Cinematic</a>
+  <a href="#chapter4a" class="mob-link">第4章　撮影リスト①</a>
+  <a href="#chapter4b" class="mob-link">　撮影リスト②</a>
+  <a href="#reference" class="mob-link">参考動画</a>
+  <button class="mobile-pdf-btn" onclick="window.print()">PDF に保存</button>
+</div>
 
 <!-- ===== SIDEBAR ===== -->
 <nav class="sidebar">
@@ -1079,10 +1179,19 @@
 
 <script>
   const sections = ['cover','intro','chapter1','chapter2','chapter2b','chapter3','chapter4a','chapter4b','reference'];
-  const links = {};
+
+  // サイドバーリンク
+  const sideLinks = {};
   sections.forEach(id => {
     const el = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
-    if (el) links[id] = el;
+    if (el) sideLinks[id] = el;
+  });
+
+  // モバイルリンク
+  const mobLinks = {};
+  sections.forEach(id => {
+    const el = document.querySelector(`.mobile-menu a[href="#${id}"]`);
+    if (el) mobLinks[id] = el;
   });
 
   function updateActive() {
@@ -1091,12 +1200,26 @@
       const el = document.getElementById(id);
       if (el && window.scrollY >= el.offsetTop - 80) current = id;
     });
-    Object.values(links).forEach(a => a.classList.remove('active'));
-    if (links[current]) links[current].classList.add('active');
+    Object.values(sideLinks).forEach(a => a.classList.remove('active'));
+    Object.values(mobLinks).forEach(a => a.classList.remove('active'));
+    if (sideLinks[current]) sideLinks[current].classList.add('active');
+    if (mobLinks[current]) mobLinks[current].classList.add('active');
   }
 
   window.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
+
+  // ハンバーガーメニュー
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  // メニュー項目タップで閉じる
+  document.querySelectorAll('.mob-link').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
 </script>
 </body>
 </html>
